@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authorization Code</title>
+</head>
+<body>
+    <h2>Your Authorization Code:</h2>
+    <p id="auth-code">Loading...</p>
+
+    <script>
+        // Parse URL parameters to extract the code
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+
+        // Display the authorization code or an error message
+        if (code) {
+            document.getElementById("auth-code").innerText = code;
+        } else {
+            document.getElementById("auth-code").innerText = "Authorization code not found in the URL.";
+        }
+    </script>
+</body>
+</html>
