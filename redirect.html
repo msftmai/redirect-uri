@@ -3,10 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Authorization Code</title>
+    <style>
+        /* Style for the code box */
+        #code-box {
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            width: fit-content;
+            display: inline-block;
+            font-family: monospace;
+            margin-bottom: 10px;
+        }
+        /* Style for the copy button */
+        #copy-button {
+            display: inline-block;
+            padding: 8px 12px;
+            font-size: 14px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #copy-button:active {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
     <h2>Your Authorization Code:</h2>
-    <p id="auth-code">Loading...</p>
+    <div id="code-box">Loading...</div>
+    <button id="copy-button" onclick="copyCode()">Copy</button>
 
     <script>
         // Parse URL parameters to extract the code
@@ -14,10 +40,22 @@
         const code = params.get('code');
 
         // Display the authorization code or an error message
+        const codeBox = document.getElementById("code-box");
         if (code) {
-            document.getElementById("auth-code").innerText = code;
+            codeBox.innerText = code;
         } else {
-            document.getElementById("auth-code").innerText = "Authorization code not found in the URL.";
+            codeBox.innerText = "Authorization code not found in the URL.";
+        }
+
+        // Function to copy code to clipboard
+        function copyCode() {
+            if (code) {
+                navigator.clipboard.writeText(code)
+                    .then(() => alert("Authorization code copied to clipboard!"))
+                    .catch(err => alert("Failed to copy code."));
+            } else {
+                alert("No authorization code to copy.");
+            }
         }
     </script>
 </body>
