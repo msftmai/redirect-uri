@@ -35,6 +35,14 @@ pre {
     background-color: #ddd;
 }
 
+/* Thêm chữ "Copy" khi hover */
+.copy-container:hover::after {
+    content: " Copy";
+    color: #555; /* Tùy chỉnh màu chữ nếu cần */
+    font-size: 12px;
+    padding-left: 5px; /* Khoảng cách giữa "Copy code" và "Copy" */
+}
+
 .icon-sm {
     width: 16px;
     height: 16px;
