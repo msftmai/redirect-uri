@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <title>Authorization Code</title>
     <style>
-        /* Nội dung styles.css */
-        
+        /* Bo tròn khung của <pre> và điều chỉnh màu sắc */
         pre {
             position: relative;
             background: #d3d6db;
@@ -15,21 +14,31 @@
             white-space: pre-wrap;
             border: 1px solid #e6e7e9;
             max-width: 500px;
+            border-radius: 8px; /* Bo tròn góc của khung */
+            margin-top: 10px;
         }
 
+        /* Định dạng nút copy thành biểu tượng */
         .copy-button {
             position: absolute;
-            top: 2px;
+            top: 8px;
             right: 10px;
             cursor: pointer;
             color: #fff;
             background: gray;
-            border-radius: 0.5em;
-            padding: 2px 7px;
+            border-radius: 50%; /* Bo tròn nút copy */
+            padding: 5px;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
         }
 
         .copy-button:hover {
-            color: #000;
+            background: #aaa; /* Đổi màu khi hover */
         }
     </style>
 </head>
@@ -52,9 +61,9 @@
             preTag.innerText = "Authorization code not found in the URL.";
         }
 
-        // Tạo nút sao chép
+        // Tạo nút sao chép với biểu tượng
         const copyButton = document.createElement("span");
-        copyButton.innerText = "Copy";
+        copyButton.innerText = "📋"; // Biểu tượng copy
         copyButton.classList.add("copy-button");
 
         // Thêm nút sao chép vào <pre> tag
@@ -76,15 +85,15 @@
                 document.execCommand("copy");
 
                 // Thông báo rằng đã sao chép thành công
-                copyButton.innerText = "Copied!";
+                copyButton.innerText = "✓"; // Biểu tượng check sau khi copy
                 setTimeout(function(){
-                    copyButton.innerText = "Copy";
+                    copyButton.innerText = "📋"; // Quay lại biểu tượng copy sau 2 giây
                 }, 2000);
             } catch (err) {
                 console.error("Unable to copy text:", err);
             } finally {
                 // Hiển thị lại nút sao chép
-                copyButton.style.display = "inline";
+                copyButton.style.display = "flex";
 
                 // Bỏ chọn text
                 window.getSelection().removeAllRanges();
