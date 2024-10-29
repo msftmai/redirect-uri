@@ -39,11 +39,10 @@
 <body>
     <h2>Your Authorization Code:</h2>
     
-    <!-- Hiển thị mã ủy quyền trong thẻ <pre> -->
-    <pre id="myPreTag">Loading...</pre>
+    <!-- Xóa nội dung mặc định trong <pre> tag -->
+    <pre id="myPreTag"></pre>
 
     <script>
-        // Nội dung script.js
         // Lấy mã từ URL
         const params = new URLSearchParams(window.location.search);
         const code = params.get('code');
