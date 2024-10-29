@@ -96,9 +96,9 @@ const checkIcon = `
 
             try {
                 document.execCommand("copy");
-                copyContainer.innerHTML = ${checkIcon}<span>Copied!</span>;
+                copyContainer.innerHTML = `${checkIcon}<span>Copied!</span>`;
                 setTimeout(function(){
-                    copyContainer.innerHTML = ${copyIcon}<span>Copy code</span>;
+                    copyContainer.innerHTML = `${copyIcon}<span>Copy code</span>`;
                 }, 2000);
             } catch (err) {
                 console.error("Unable to copy text:", err);
