@@ -13,11 +13,12 @@ pre {
     white-space: pre-wrap;
     word-wrap: break-word;
     margin-top: 20px;
+    margin-top: 60px; /* Thêm khoảng cách phía trên để không bị che */
 }
 
 .copy-container {
     position: absolute;
-    bottom: 10px;
+    top: 10px;
     right: 10px;
     display: flex;
     align-items: center;
