@@ -24,8 +24,6 @@ const checkIcon =
     </svg>;
 
 copyContainer.innerHTML = ${copyIcon}<span>Copy code</span>;
-copyContainer.title = "Copy"; // Đây là dòng thêm title
-
 preTag.appendChild(copyContainer);
 
 copyContainer.addEventListener("click", () => {
