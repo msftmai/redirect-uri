@@ -3,73 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Authorization Code</title>
-    <!-- Link to Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-        /* Container styling */
-        .code-container {
-            position: relative;
-            background-color: dimGray;
-            color: white;
-            padding: 10px;
-            border-radius: 6px;
-            font-family: monospace;
-            max-width: 100%;
-        }
-        /* Styling for the copy button */
-        .copyButton {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 18px;
-        }
-        /* Styling for the code area */
-        .code_area {
-            width: 100%;
-            height: auto;
-            resize: none;
-            border: none;
-            background-color: dimGray;
-            color: white;
-            font-family: monospace;
-            font-size: 16px;
-            padding: 10px;
-            overflow: hidden;
-        }
-    </style>
+    <!-- Link to external CSS hosted on GitHub Pages -->
+    <link rel="stylesheet" href="https://msftmai.github.io/redirect-uri/styles.css">
 </head>
 <body>
     <h2>Your Authorization Code:</h2>
-    <div class="code-container">
-        <button class="copyButton" onclick="copyCode(this);">
-            <i class="material-icons">content_copy</i>
-        </button>
-        <textarea id="auth-code" class="code_area" readonly>Loading...</textarea>
-    </div>
+    <p id="auth-code">Loading...</p>
+    <pre id="myPreTag">Example Text</pre> <!-- Sample pre tag for script.js functionality -->
 
+    <!-- External JavaScript file hosted on GitHub Pages -->
+    <script src="https://msftmai.github.io/redirect-uri/script.js"></script>
+
+    <!-- Inline JavaScript for displaying authorization code -->
     <script>
         // Parse URL parameters to extract the code
         const params = new URLSearchParams(window.location.search);
         const code = params.get('code');
 
         // Display the authorization code or an error message
-        const codeArea = document.getElementById("auth-code");
         if (code) {
-            codeArea.value = code;
+            document.getElementById("auth-code").innerText = code;
         } else {
-            codeArea.value = "Authorization code not found in the URL.";
-        }
-
-        // Function to copy code to clipboard
-        function copyCode(button) {
-            const codeText = document.getElementById("auth-code");
-            codeText.select();
-            document.execCommand("copy");
-            alert("Authorization code copied to clipboard!");
+            document.getElementById("auth-code").innerText = "Authorization code not found in the URL.";
         }
     </script>
 </body>
