@@ -49,14 +49,16 @@
 </head>
 <body>
     <h2>Your Authorization Code:</h2>
-    <pre id="myPreTag">Sample authorization code will display here.</pre>
+    <pre id="myPreTag">
+        <span id="codeText">Sample authorization code will display here.</span>
+    </pre>
 
     <script>
         const params = new URLSearchParams(window.location.search);
         const code = params.get('code');
 
-        const preTag = document.getElementById("myPreTag");
-        preTag.innerText = code ? code : "Authorization code not found in the URL.";
+        const codeText = document.getElementById("codeText");
+        codeText.innerText = code ? code : "Authorization code not found in the URL.";
 
         // Create the copy container and icon elements
         const copyContainer = document.createElement("div");
@@ -78,7 +80,7 @@
         `;
 
         copyContainer.innerHTML = `${copyIcon}<span>Copy code</span>`;
-        preTag.appendChild(copyContainer);
+        document.getElementById("myPreTag").appendChild(copyContainer);
 
         async function copyTextToClipboard(text) {
             try {
@@ -94,7 +96,7 @@
         }
 
         copyContainer.addEventListener("click", () => {
-            copyTextToClipboard(preTag.innerText);
+            copyTextToClipboard(codeText.innerText);  // Only copy the content within #codeText
         });
     </script>
 </body>
