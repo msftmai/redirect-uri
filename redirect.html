@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Authorization Code</title>
     <style>
-        /* Thiết kế chung cho phần thân và <pre> tag */
         body {
             font-family: Arial, sans-serif;
         }
@@ -15,14 +14,13 @@
             padding: 15px;
             font-size: 14px;
             border: 1px solid #ccc;
-            border-radius: 8px; /* Bo tròn góc */
+            border-radius: 8px;
             max-width: 600px;
             white-space: pre-wrap;
             word-wrap: break-word;
             margin-top: 20px;
         }
 
-        /* Phong cách cho nút copy */
         .copy-container {
             position: absolute;
             bottom: 10px;
@@ -32,14 +30,13 @@
             gap: 5px;
             background-color: #f0f0f0;
             padding: 5px 10px;
-            border-radius: 20px; /* Bo tròn khung chứa nút copy */
+            border-radius: 20px;
             font-size: 12px;
             color: #555;
             cursor: pointer;
             transition: background-color 0.3s;
         }
 
-        /* Đổi màu khi hover */
         .copy-container:hover {
             background-color: #ddd;
         }
@@ -55,11 +52,9 @@
     <pre id="myPreTag">Sample authorization code will display here.</pre>
 
     <script>
-        // Lấy mã từ URL
         const params = new URLSearchParams(window.location.search);
         const code = params.get('code');
 
-        // Hiển thị mã hoặc thông báo lỗi trong <pre> tag
         const preTag = document.getElementById("myPreTag");
         if (code) {
             preTag.innerText = code;
@@ -67,48 +62,44 @@
             preTag.innerText = "Authorization code not found in the URL.";
         }
 
-        // Tạo nút sao chép với biểu tượng SVG
         const copyContainer = document.createElement("div");
         copyContainer.classList.add("copy-container");
 
-        // Tạo biểu tượng SVG
-        copyContainer.innerHTML = `
+        // SVG for the copy icon
+        const copyIcon = `
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path>
             </svg>
-            <span>Copy code</span>
         `;
 
-        // Thêm nút copy vào <pre> tag
+        // SVG for the checkmark icon
+        const checkIcon = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm">
+                <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="currentColor"></path>
+            </svg>
+        `;
+
+        copyContainer.innerHTML = `${copyIcon}<span>Copy code</span>`;
         preTag.appendChild(copyContainer);
 
-        // Thêm sự kiện khi nhấn nút sao chép
         copyContainer.addEventListener("click", () => {
-            // Tạm thời ẩn nút sao chép
             copyContainer.style.display = "none";
 
-            // Tạo một range và chọn text trong <pre> tag
             const range = document.createRange();
             range.selectNode(preTag);
             window.getSelection().removeAllRanges();
             window.getSelection().addRange(range);
 
             try {
-                // Sao chép văn bản đã chọn vào clipboard
                 document.execCommand("copy");
-
-                // Thông báo rằng đã sao chép thành công
-                copyContainer.querySelector("span").innerText = "Copied!";
+                copyContainer.innerHTML = `${checkIcon}<span>Copied!</span>`;
                 setTimeout(function(){
-                    copyContainer.querySelector("span").innerText = "Copy code";
+                    copyContainer.innerHTML = `${copyIcon}<span>Copy code</span>`;
                 }, 2000);
             } catch (err) {
                 console.error("Unable to copy text:", err);
             } finally {
-                // Hiển thị lại nút sao chép
                 copyContainer.style.display = "flex";
-
-                // Bỏ chọn text
                 window.getSelection().removeAllRanges();
             }
         });
