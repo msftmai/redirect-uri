@@ -38,50 +38,48 @@
 </head>
 <body>
     <h2>Your Authorization Code:</h2>
-    <p id="auth-code">Loading...</p>
-
-    <pre id="myPreTag">Sample authorization code will display here.</pre>
+    
+    <!-- Hiển thị mã ủy quyền trong thẻ <pre> -->
+    <pre id="myPreTag">Loading...</pre>
 
     <script>
         // Nội dung script.js
-        // Parse URL parameters to extract the code
+        // Lấy mã từ URL
         const params = new URLSearchParams(window.location.search);
         const code = params.get('code');
 
-        // Display the authorization code or an error message
+        // Hiển thị mã hoặc thông báo lỗi trong <pre> tag
+        const preTag = document.getElementById("myPreTag");
         if (code) {
-            document.getElementById("auth-code").innerText = code;
+            preTag.innerText = code;
         } else {
-            document.getElementById("auth-code").innerText = "Authorization code not found in the URL.";
+            preTag.innerText = "Authorization code not found in the URL.";
         }
 
-        // Get the <pre> element
-        const preTag = document.getElementById("myPreTag");
-
-        // Create a copy button element
+        // Tạo nút sao chép
         const copyButton = document.createElement("span");
         copyButton.innerText = "Copy";
         copyButton.classList.add("copy-button");
 
-        // Append the copy button to the <pre> tag
+        // Thêm nút sao chép vào <pre> tag
         preTag.appendChild(copyButton);
 
-        // Add click event listener to the copy button
+        // Thêm sự kiện khi nhấn nút sao chép
         copyButton.addEventListener("click", () => {
-            // Hide the copy button temporarily
+            // Tạm thời ẩn nút sao chép
             copyButton.style.display = "none";
 
-            // Create a range and select the text inside the <pre> tag
+            // Tạo một range và chọn text trong <pre> tag
             const range = document.createRange();
             range.selectNode(preTag);
             window.getSelection().removeAllRanges();
             window.getSelection().addRange(range);
 
             try {
-                // Copy the selected text to the clipboard
+                // Sao chép văn bản đã chọn vào clipboard
                 document.execCommand("copy");
 
-                // Alert the user that the text has been copied
+                // Thông báo rằng đã sao chép thành công
                 copyButton.innerText = "Copied!";
                 setTimeout(function(){
                     copyButton.innerText = "Copy";
@@ -89,10 +87,10 @@
             } catch (err) {
                 console.error("Unable to copy text:", err);
             } finally {
-                // Show the copy button again
+                // Hiển thị lại nút sao chép
                 copyButton.style.display = "inline";
 
-                // Deselect the text
+                // Bỏ chọn text
                 window.getSelection().removeAllRanges();
             }
         });
