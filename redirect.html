@@ -4,36 +4,45 @@
     <meta charset="UTF-8">
     <title>Authorization Code</title>
     <style>
-        /* Container for the code and copy icon */
+        /* Container for the code box */
         .code-container {
-            display: flex;
-            align-items: center;
+            position: relative;
             border: 1px solid #e0e0e0;
-            background-color: #f7f7f8;
-            padding: 10px;
+            background-color: #f6f8fa;
+            padding: 15px;
             border-radius: 6px;
             font-family: monospace;
             font-size: 16px;
-            max-width: 100%;
-            position: relative;
             color: #333;
+            max-width: 100%;
         }
         /* Styling for the code text */
         #auth-code {
-            flex: 1;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        /* Styling for the copy icon */
-        .copy-icon {
+        /* Styling for the copy button */
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 6px 12px;
+            font-size: 14px;
+            background-color: #24292f;
+            color: white;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-            margin-left: 10px;
-            font-size: 18px;
-            color: #007bff;
+            display: flex;
+            align-items: center;
         }
-        .copy-icon:hover {
-            color: #0056b3;
+        .copy-button:hover {
+            background-color: #444d56;
+        }
+        /* Icon styling */
+        .copy-icon {
+            margin-right: 6px;
         }
     </style>
 </head>
@@ -41,7 +50,9 @@
     <h2>Your Authorization Code:</h2>
     <div class="code-container">
         <span id="auth-code">Loading...</span>
-        <span class="copy-icon" onclick="copyCode()">📋</span>
+        <button class="copy-button" onclick="copyCode()">
+            <span class="copy-icon">📋</span> Copy code
+        </button>
     </div>
 
     <script>
