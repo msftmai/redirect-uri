@@ -15,8 +15,6 @@ pre {
     margin-top: 20px;
 }
 
-/* Phong cách sẵn có cho body và pre không thay đổi */
-
 .copy-container {
     position: absolute;
     top: 10px;
@@ -31,35 +29,10 @@ pre {
     color: #555;
     cursor: pointer;
     transition: background-color 0.3s;
-    position: relative; /* Để tooltip có thể xuất hiện gần đó */
 }
 
 .copy-container:hover {
     background-color: #ddd;
-}
-
-/* Tooltip styles */
-.copy-container .tooltip {
-    visibility: hidden;
-    opacity: 0;
-    width: max-content;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 5px;
-    padding: 5px;
-    position: absolute;
-    top: -35px; /* Vị trí bên trên nút copy */
-    right: 0;
-    font-size: 12px;
-    transition: opacity 0.3s;
-    white-space: nowrap;
-}
-
-/* Hiển thị tooltip khi hover */
-.copy-container:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
 }
 
 .icon-sm {
