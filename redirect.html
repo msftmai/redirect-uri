@@ -3,19 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Authorization Code</title>
-    <!-- Link to external CSS hosted on GitHub Pages -->
-    <link rel="stylesheet" href="https://msftmai.github.io/redirect-uri/styles.css">
+    <style>
+        /* Nội dung styles.css */
+        body {
+            background: #ffe4c4;
+        }
+
+        pre {
+            position: relative;
+            background: #d3d6db;
+            padding: 10px;
+            font-size: 15px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            border: 1px solid #e6e7e9;
+            max-width: 500px;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 2px;
+            right: 10px;
+            cursor: pointer;
+            color: #fff;
+            background: gray;
+            border-radius: 0.5em;
+            padding: 2px 7px;
+        }
+
+        .copy-button:hover {
+            color: #000;
+        }
+    </style>
 </head>
 <body>
     <h2>Your Authorization Code:</h2>
     <p id="auth-code">Loading...</p>
-    <pre id="myPreTag">Example Text</pre> <!-- Sample pre tag for script.js functionality -->
 
-    <!-- External JavaScript file hosted on GitHub Pages -->
-    <script src="https://msftmai.github.io/redirect-uri/script.js"></script>
+    <pre id="myPreTag">Sample authorization code will display here.</pre>
 
-    <!-- Inline JavaScript for displaying authorization code -->
     <script>
+        // Nội dung script.js
         // Parse URL parameters to extract the code
         const params = new URLSearchParams(window.location.search);
         const code = params.get('code');
@@ -26,6 +54,48 @@
         } else {
             document.getElementById("auth-code").innerText = "Authorization code not found in the URL.";
         }
+
+        // Get the <pre> element
+        const preTag = document.getElementById("myPreTag");
+
+        // Create a copy button element
+        const copyButton = document.createElement("span");
+        copyButton.innerText = "Copy";
+        copyButton.classList.add("copy-button");
+
+        // Append the copy button to the <pre> tag
+        preTag.appendChild(copyButton);
+
+        // Add click event listener to the copy button
+        copyButton.addEventListener("click", () => {
+            // Hide the copy button temporarily
+            copyButton.style.display = "none";
+
+            // Create a range and select the text inside the <pre> tag
+            const range = document.createRange();
+            range.selectNode(preTag);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+
+            try {
+                // Copy the selected text to the clipboard
+                document.execCommand("copy");
+
+                // Alert the user that the text has been copied
+                copyButton.innerText = "Copied!";
+                setTimeout(function(){
+                    copyButton.innerText = "Copy";
+                }, 2000);
+            } catch (err) {
+                console.error("Unable to copy text:", err);
+            } finally {
+                // Show the copy button again
+                copyButton.style.display = "inline";
+
+                // Deselect the text
+                window.getSelection().removeAllRanges();
+            }
+        });
     </script>
 </body>
 </html>
