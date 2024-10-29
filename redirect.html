@@ -41,39 +41,6 @@
             background-color: #ddd;
         }
 
-        .copy-container .tooltip {
-            visibility: hidden;
-            width: 80px;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            top: -40px; /* Adjust to position above the button */
-            right: 0;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 10px;
-            white-space: nowrap;
-        }
-
-        .copy-container .tooltip::after {
-            content: "";
-            position: absolute;
-            bottom: -5px; /* Adjust this to position the arrow */
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 5px;
-            border-style: solid;
-            border-color: #333 transparent transparent transparent;
-        }
-
-        .copy-container:hover .tooltip {
-            visibility: visible;
-            opacity: 1;
-        }
-
         .icon-sm {
             width: 16px;
             height: 16px;
@@ -107,7 +74,7 @@
                 </svg>
             `;
 
-            copyContainer.innerHTML = `${copyIcon}<span>Copy code</span><div class="tooltip">Click to copy</div>`;
+            copyContainer.innerHTML = `${copyIcon}<span>Copy code</span>`;
             preTag.appendChild(copyContainer);
 
             copyContainer.addEventListener("click", () => {
@@ -118,9 +85,9 @@
 
                 try {
                     document.execCommand("copy");
-                    copyContainer.innerHTML = `${checkIcon}<span>Copied!</span><div class="tooltip">Copied!</div>`;
+                    copyContainer.innerHTML = `${checkIcon}<span>Copied!</span>`;
                     setTimeout(() => {
-                        copyContainer.innerHTML = `${copyIcon}<span>Copy code</span><div class="tooltip">Click to copy</div>`;
+                        copyContainer.innerHTML = `${copyIcon}<span>Copy code</span>`;
                     }, 2000);
                 } catch (err) {
                     console.error("Unable to copy text:", err);
