@@ -41,6 +41,28 @@
             background-color: #ddd;
         }
 
+        .copy-container .tooltip {
+            visibility: hidden;
+            width: 80px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            top: -35px; /* adjust to position above the button */
+            right: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 10px;
+            white-space: nowrap;
+        }
+
+        .copy-container:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
         .icon-sm {
             width: 16px;
             height: 16px;
@@ -74,7 +96,7 @@
                 </svg>
             `;
 
-            copyContainer.innerHTML = `${copyIcon}<span>Copy code</span>`;
+            copyContainer.innerHTML = `${copyIcon}<span>Copy code</span><div class="tooltip">Click to copy</div>`;
             preTag.appendChild(copyContainer);
 
             copyContainer.addEventListener("click", () => {
@@ -85,9 +107,9 @@
 
                 try {
                     document.execCommand("copy");
-                    copyContainer.innerHTML = `${checkIcon}<span>Copied!</span>`;
+                    copyContainer.innerHTML = `${checkIcon}<span>Copied!</span><div class="tooltip">Copied!</div>`;
                     setTimeout(() => {
-                        copyContainer.innerHTML = `${copyIcon}<span>Copy code</span>`;
+                        copyContainer.innerHTML = `${copyIcon}<span>Copy code</span><div class="tooltip">Click to copy</div>`;
                     }, 2000);
                 } catch (err) {
                     console.error("Unable to copy text:", err);
